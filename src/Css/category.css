@@ -1,0 +1,37 @@
+.category .swiper-button-prev,
+.category .swiper-button-next {
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  color: #000;
+  border-radius: 50%;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* Show arrows again */
+.category .swiper-button-prev::after,
+.category .swiper-button-next::after {
+  font-size: 18px;
+  font-weight: bold;
+  color: inherit;
+}
+
+/* Hover effect */
+.category .swiper-button-prev:hover,
+.category .swiper-button-next:hover {
+  background: #000;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Move outside */
+.category .swiper-button-prev {
+  left: -50px;
+}
+.category .swiper-button-next {
+  right: -50px;
+}
