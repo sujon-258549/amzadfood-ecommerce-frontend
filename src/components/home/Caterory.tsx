@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import "../../Css/category.css";
+import "../../Styles/category.css";
 
 // Mock category data
 const categories = [
@@ -113,11 +113,12 @@ const Category = () => {
   return (
     <div className="mt-20  category">
       <div className="container  mx-auto">
-        <div className="bg-gray-300 px-2">
+        <div className="px-2">
+          {/* bg-[#ffffffae] */}
           {/* Swiper Slider */}
           <Swiper
             modules={[Navigation]}
-            spaceBetween={10}
+            // spaceBetween={10}
             slidesPerView={2}
             navigation={{
               nextEl: ".swiper-button-next",
@@ -125,21 +126,25 @@ const Category = () => {
             }}
             // No autoplay
             breakpoints={{
+              380: {
+                slidesPerView: 3,
+                // spaceBetween: 10,
+              },
               640: {
                 slidesPerView: 4,
-                spaceBetween: 10,
+                // spaceBetween: 10,
               },
               768: {
                 slidesPerView: 6,
-                spaceBetween: 10,
+                // spaceBetween: 10,
               },
               1024: {
-                slidesPerView: 10,
-                spaceBetween: 10,
+                slidesPerView: 8,
+                // spaceBetween: 10,
               },
               1280: {
-                slidesPerView: 12,
-                spaceBetween: 10,
+                slidesPerView: 9,
+                // spaceBetween: 10,
               },
             }}
             className="relative"
@@ -148,10 +153,10 @@ const Category = () => {
               <SwiperSlide key={category.id}>
                 <div className="cursor-pointer py-2">
                   {/* Category Card - No hover animations */}
-                  <div className="bg-white rounded-lg p-2 shadow-sm border border-gray-100">
+                  <div className="bg-white rounded-lg py-5">
                     {/* Image Container - No hover effects */}
                     <div className="relative mb-2">
-                      <div className="w-14 h-14 mx-auto rounded-full bg-gradient-to-br from-blue-100 to-purple-100 p-2">
+                      <div className="w-24 h-24 mx-auto rounded-full bg-gray-200 p-2">
                         <img
                           src={category.image}
                           alt={category.name}

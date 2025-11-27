@@ -6,7 +6,10 @@ import { IoCartOutline } from "react-icons/io5";
 import { HiOutlineHeart } from "react-icons/hi2";
 import { FiUser } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import SearchBer from "../SearchBer.tsx/SearchBer";
+import SearchBer from "@/components/SearchBer.tsx/SearchBer";
+import { UserDropdown } from "@/components/SearchBer.tsx/dropdown/UserDropdown";
+import { MenuDropdown } from "@/components/SearchBer.tsx/dropdown/MenuDropdown";
+
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,7 +73,7 @@ const Header = () => {
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
       style={{
-        backgroundColor: isScrolled ? "rgba(16,16,16,0.95)" : "",
+        backgroundColor: isScrolled ? "#ffffffae" : "",
         backdropFilter: isScrolled ? "blur(12px)" : "blur(8px)",
         WebkitBackdropFilter: isScrolled ? "blur(12px)" : "blur(8px)",
         boxShadow: isScrolled
@@ -80,8 +83,8 @@ const Header = () => {
           "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease",
       }}
     >
-      <div className="container">
-        <header className=" flex justify-between items-center py-3 gap-4">
+      <div className="container ">
+        <header className=" flex  justify-between items-center py-3 gap-4">
           {/* Left Side - Logo/Icon */}
           <Link href="/" className="flex-shrink-0 group">
             <img
@@ -92,43 +95,42 @@ const Header = () => {
 
           {/* Middle - Search Bar with Dropdown */}
           <div className="flex-1 max-w-2xl">
-            <SearchBer />
+            <div className="hidden lg:block">
+              <SearchBer />
+            </div>
           </div>
 
           {/* Right Side - Wishlist, Login, Cart */}
-          <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+          <div className="flex items-center gap-4 md:gap-4 flex-shrink-0 ">
             {/* Wishlist */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white hover:bg-white/10 hover:scale-110 transition-all duration-200 relative group"
-              aria-label="Wishlist"
-            >
-              <HiOutlineHeart className="text-xl group-hover:text-red-400 transition-colors" />
-            </Button>
+            <div className="hidden md:block ">
+              <div className=" flex items-center gap-3 md:gap-6">
+                <button
+                  className="text-black hover:bg-gray-100 hover:scale-110 transition-all duration-200 relative group"
+                  aria-label="Wishlist"
+                >
+                  <HiOutlineHeart className="text-2xl transition-colors" />
+                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-xs text-white font-semibold shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+                    0
+                  </span>
+                </button>
 
-            {/* Login */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white hover:bg-white/10 hover:scale-110 transition-all duration-200 group"
-              aria-label="Login"
-            >
-              <FiUser className="text-xl group-hover:text-primary transition-colors" />
-            </Button>
+                {/* Cart */}
+                <button
+                  className="text-black hover:bg-gray-100 hover:scale-110 transition-all duration-200 relative group"
+                  aria-label="Cart"
+                >
+                  <IoCartOutline className="text-2xl transition-colors" />
+                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-xs text-white font-semibold shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+                    0
+                  </span>
+                </button>
 
-            {/* Cart */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white hover:bg-white/10 hover:scale-110 transition-all duration-200 relative group"
-              aria-label="Cart"
-            >
-              <IoCartOutline className="text-xl group-hover:text-primary transition-colors" />
-              <span className="absolute top-1 right-1 w-5 h-5 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-xs text-white font-semibold shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
-                0
-              </span>
-            </Button>
+                {/* Login */}
+                <UserDropdown/>
+              </div>
+            </div>
+            <MenuDropdown />
           </div>
         </header>
       </div>

@@ -2,6 +2,12 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { Input } from "../ui/input";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "../ui/input-group";
+import { Search } from "lucide-react";
 interface Product {
   id: number;
   name: string;
@@ -65,7 +71,7 @@ const SearchBer = () => {
   return (
     <div ref={searchRef} className=" relative">
       <div className="relative group">
-        <IoSearchOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl !text-black transition-colors duration-200 group-focus-within:!text-primary" />
+        {/* <IoSearchOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl !text-black transition-colors duration-200 group-focus-within:!text-primary" />
         <Input
           type="text"
           placeholder="Search for products..."
@@ -77,7 +83,21 @@ const SearchBer = () => {
           }}
           className="pl-10 pr-4 py-2.5 w-full bg-white/95 backdrop-blur-sm text-foreground border border-gray-400 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:border-primary/50 focus-visible:bg-white hover:bg-white hover:shadow-md"
           style={{ borderRadius: "5px" }}
-        />
+        /> */}
+        <InputGroup className="border border-gray-500 rounded-[5px]">
+          <InputGroupInput
+            placeholder="Search for products..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setIsSearchFocused(true)}
+            onBlur={() => {
+              setTimeout(() => setIsSearchFocused(false), 200);
+            }}
+          />
+          <InputGroupAddon>
+            <Search />
+          </InputGroupAddon>
+        </InputGroup>
       </div>
 
       {/* Search Dropdown */}
