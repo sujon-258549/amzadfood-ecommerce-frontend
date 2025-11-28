@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
 import Footer from "@/components/common/Foote/Footer";
+import MobileNav from "@/components/common/Header/MobileNav";
 
 
 const geistSans = Geist({
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Header/>
         {children}
         <Footer/>
+        <MobileNav/>
       </body>
     </html>
   );

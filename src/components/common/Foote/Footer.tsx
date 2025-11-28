@@ -10,7 +10,7 @@ import { FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary pt-5 text-white">
+    <footer className="bg-primary pt-5 mt-8 md:mt-16 text-white">
       {/* Main Footer */}
       <div className="container">
         <div>
@@ -134,7 +134,7 @@ export default function Footer() {
           href="https://wa.me/880123456789"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-green-500 text-white p-2 md:p-4 rounded-full shadow-2xl hover:bg-green-600 transition transform hover:scale-110"
+          className="bg-primary text-white p-2 md:p-4 rounded-full shadow-2xl hover:bg-green-600 transition transform hover:scale-110"
         >
           <MessageCircle className="w-4  h-4 " />
         </a>

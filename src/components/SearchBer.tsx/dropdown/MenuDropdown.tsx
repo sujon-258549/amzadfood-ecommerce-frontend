@@ -37,7 +37,7 @@ export function MenuDropdown() {
       <HoverCardContent
         sideOffset={12}
         align="end"
-        className="w-60 p-0  bg-white/95 border backdrop-blur-xl shadow-2xl"
+        className="w-60 p-0  bg-white/95 mt-[6px] border backdrop-blur-xl shadow-2xl"
       >
         {/* Navigation Menu */}
         <nav className="p-2">

@@ -1,141 +1,203 @@
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import Link from "next/link";
+// import SearchBer from "@/components/SearchBer.tsx/SearchBer";
+// import { UserDropdown } from "@/components/SearchBer.tsx/dropdown/UserDropdown";
+// import { MenuDropdown } from "@/components/SearchBer.tsx/dropdown/MenuDropdown";
+// import ShoppingCardDrawer from "@/components/shoppingCard/ShoppingCardDrawer";
+// import WishListCartDrawer from "@/components/wishListCard/WishListCartDrawer";
+
+// export default function Header() {
+//   const [hideTopbar, setHideTopbar] = useState(false);
+
+//   useEffect(() => {
+//     const onScroll = () => {
+//       // Show topbar only when near the top (first 100px)
+//       setHideTopbar(window.scrollY > 100);
+//     };
+
+//     window.addEventListener("scroll", onScroll, { passive: true });
+//     onScroll(); // initial check
+
+//     return () => window.removeEventListener("scroll", onScroll);
+//   }, []);
+
+//   return (
+//     <>
+//       {/* TOPBAR – Beautiful, hides smoothly on scroll */}
+//       <div
+//         className={`fixed inset-x-0 top-0 z-50 bg-primary text-white text-sm font-semibold shadow-lg transition-all duration-200 ease-out ${
+//           hideTopbar
+//             ? "-translate-y-full opacity-0"
+//             : "translate-y-0 opacity-100"
+//         }`}
+//       >
+//         <div className="py-3 text-center">
+//           <span className="hidden sm:inline">
+//             Free Delivery on orders above ৳999
+//           </span>
+//           <span className="mx-3">•</span>
+//           <span>
+//             Call:{" "}
+//             <a href="tel:09638000888" className="underline">
+//               09638-000888
+//             </a>
+//           </span>
+//           <span className="mx-3 hidden md:inline">•</span>
+//           <span className="hidden md:inline">
+//             100% Fresh & Halal Guaranteed
+//           </span>
+//         </div>
+//       </div>
+
+//       {/* MAIN HEADER – Always sticky, moves up when topbar hides */}
+//       <header
+//         className={`fixed inset-x-0 z-40 h-20 bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-md transition-all duration-200 ease-out ${
+//           hideTopbar ? "top-0" : "top-12"
+//         }`}
+//       >
+//         <div className="container mx-auto px-4 h-full">
+//           <div className="flex items-center justify-between h-full">
+//             {/* Logo */}
+//             <Link href="/" className="flex-shrink-0">
+//               <img
+//                 src="https://amzadfood.com/wp-content/uploads/2024/04/Final-Logo-Website-1.png"
+//                 alt="Amzad Food"
+//                 className="h-11 w-auto transition-transform hover:scale-105"
+//               />
+//             </Link>
+
+//             {/* Search Bar */}
+//             <div className="hidden lg:block flex-1 max-w-2xl mx-10">
+//               <SearchBer />
+//             </div>
+
+//             {/* Right Icons */}
+//             <div className="flex items-center gap-5">
+//               <div className="hidden md:flex items-center gap-6">
+//                 {/* Wishlist */}
+//                 {/* <button className="relative p-2.5 rounded-full hover:bg-gray-100 transition group">
+//                   <HiOutlineHeart className="w-6 h-6 text-gray-700" />
+//                   <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex-center font-bold shadow-lg">
+//                     3
+//                   </span>
+//                 </button> */}
+
+//                 {/* Cart */}
+//                 <WishListCartDrawer />
+//                 <ShoppingCardDrawer />
+
+//                 <UserDropdown />
+//               </div>
+
+//               <MenuDropdown />
+//             </div>
+//           </div>
+//         </div>
+//       </header>
+
+//       {/* Smooth content spacing – no jump ever */}
+//       <div
+//         className={`transition-all duration-500 ${
+//           hideTopbar ? "pt-20" : "pt-32"
+//         }`}
+//       />
+//     </>
+//   );
+// }
+
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { IoCartOutline } from "react-icons/io5";
-import { HiOutlineHeart } from "react-icons/hi2";
-import { FiUser } from "react-icons/fi";
-import { Button } from "@/components/ui/button";
 import SearchBer from "@/components/SearchBer.tsx/SearchBer";
 import { UserDropdown } from "@/components/SearchBer.tsx/dropdown/UserDropdown";
 import { MenuDropdown } from "@/components/SearchBer.tsx/dropdown/MenuDropdown";
+import ShoppingCardDrawer from "@/components/shoppingCard/ShoppingCardDrawer";
+import WishListCartDrawer from "@/components/wishListCard/WishListCartDrawer";
 
-
-const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-
-  const lastScrollY = useRef(0);
-  const ticking = useRef(false);
+export default function Header() {
+  const [hideTopbar, setHideTopbar] = useState(false);
 
   useEffect(() => {
-    const scrollContainer = document.querySelector<HTMLDivElement>(
-      "#main-scroll-container"
-    );
+    let ticking = false;
 
-    const handleScroll = () => {
-      if (ticking.current) return;
-      ticking.current = true;
-
-      requestAnimationFrame(() => {
-        const currentScrollY = scrollContainer
-          ? scrollContainer.scrollTop
-          : window.scrollY;
-
-        // Update background blur state
-        setIsScrolled(currentScrollY > 10);
-
-        // Determine scroll direction with threshold to prevent flickering
-        const scrollThreshold = 5;
-        if (currentScrollY < 10) {
-          // At the top, always show header
-          setIsVisible(true);
-        } else if (currentScrollY > lastScrollY.current + scrollThreshold) {
-          // Scrolling down - hide header
-          setIsVisible(false);
-        } else if (currentScrollY < lastScrollY.current - scrollThreshold) {
-          // Scrolling up - show header
-          setIsVisible(true);
-        }
-
-        lastScrollY.current = currentScrollY;
-        ticking.current = false;
-      });
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setHideTopbar(window.scrollY > 80);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    // Initial check
-    handleScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
 
-    if (scrollContainer) {
-      scrollContainer.addEventListener("scroll", handleScroll, {
-        passive: true,
-      });
-      return () => scrollContainer.removeEventListener("scroll", handleScroll);
-    } else {
-      window.addEventListener("scroll", handleScroll, { passive: true });
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div
-      className={`fixed top-0 left-0 w-full z-50 font-poppins transition-transform duration-500 ease-in-out ${
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      }`}
-      style={{
-        backgroundColor: isScrolled ? "#ffffffae" : "",
-        backdropFilter: isScrolled ? "blur(12px)" : "blur(8px)",
-        WebkitBackdropFilter: isScrolled ? "blur(12px)" : "blur(8px)",
-        boxShadow: isScrolled
-          ? "0 8px 16px -4px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.05)"
-          : "0 4px 6px -1px rgba(0,0,0,0.1)",
-        transition:
-          "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease",
-      }}
-    >
-      <div className="container ">
-        <header className=" flex  justify-between items-center py-3 gap-4">
-          {/* Left Side - Logo/Icon */}
-          <Link href="/" className="flex-shrink-0 group">
-            <img
-              className="h-10 w-32"
-              src="https://amzadfood.com/wp-content/uploads/2024/04/Final-Logo-Website-1.png"
-            />
-          </Link>
+    <>
+      {/* TOPBAR – Fast & Smooth Hide */}
+      <div
+        className={`fixed inset-x-0 top-0 z-50 bg-primary text-white text-sm font-semibold text-center transition-transform duration-200 ease-out ${
+          hideTopbar ? "-translate-y-full" : "translate-y-0"
+        }`}
+      >
+        <div className="h-[30px] flex items-center justify-center container mx-auto px-4">
+          <span className="hidden sm:inline">
+            Free Delivery on orders above ৳999
+          </span>
+          <span className="mx-3">•</span>
+          <span>
+            Call:{" "}
+            <a href="tel:09638000888" className="underline">
+              09638-000888
+            </a>
+          </span>
+          <span className="mx-3 hidden md:inline">•</span>
+          <span className="hidden md:inline">100% Fresh & Halal</span>
+        </div>
+      </div>
 
-          {/* Middle - Search Bar with Dropdown */}
-          <div className="flex-1 max-w-2xl">
-            <div className="hidden lg:block">
+      {/* MAIN HEADER – No Jump, Perfect Sticky */}
+      <header
+        className={`fixed inset-x-0 z-40 h-20 bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-md transition-all duration-200 ease-out ${
+          hideTopbar ? "top-0" : "top-8"
+        }`}
+      >
+        <div className="container mx-auto px-4 h-full">
+          <div className="flex items-center justify-between h-full">
+            <Link href="/" className="flex-shrink-0">
+              <img
+                src="/logo/logo.png"
+                alt="Amzad Food"
+                className="h-11 w-auto transition-transform hover:scale-105"
+              />
+            </Link>
+
+            <div className="hidden lg:block flex-1 max-w-2xl mx-10">
               <SearchBer />
             </div>
-          </div>
 
-          {/* Right Side - Wishlist, Login, Cart */}
-          <div className="flex items-center gap-4 md:gap-4 flex-shrink-0 ">
-            {/* Wishlist */}
-            <div className="hidden md:block ">
-              <div className=" flex items-center gap-3 md:gap-6">
-                <button
-                  className="text-black hover:bg-gray-100 hover:scale-110 transition-all duration-200 relative group"
-                  aria-label="Wishlist"
-                >
-                  <HiOutlineHeart className="text-2xl transition-colors" />
-                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-xs text-white font-semibold shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
-                    0
-                  </span>
-                </button>
-
-                {/* Cart */}
-                <button
-                  className="text-black hover:bg-gray-100 hover:scale-110 transition-all duration-200 relative group"
-                  aria-label="Cart"
-                >
-                  <IoCartOutline className="text-2xl transition-colors" />
-                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-xs text-white font-semibold shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
-                    0
-                  </span>
-                </button>
-
-                {/* Login */}
-                <UserDropdown/>
+            <div className="flex items-center gap-5">
+              <div className="hidden md:flex items-center gap-6">
+                <WishListCartDrawer />
+                <ShoppingCardDrawer />
               </div>
+              <UserDropdown />
+              <MenuDropdown />
             </div>
-            <MenuDropdown />
           </div>
-        </header>
-      </div>
-    </div>
-  );
-};
+        </div>
+      </header>
 
-export default Header;
+      {/* এই div টা দিয়ে কোনো লাফালাফি হবে না – সবচেয়ে গুরুত্বপূর্ণ */}
+      {/* <div className={hideTopbar ? "h-20 : "h-32"} /> */}
+      <div className={hideTopbar ? "h-20" : "h-32"} />
+    </>
+  );
+}

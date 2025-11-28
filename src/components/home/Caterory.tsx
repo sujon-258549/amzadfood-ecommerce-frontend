@@ -111,40 +111,31 @@ const categories = [
 
 const Category = () => {
   return (
-    <div className="mt-20  category">
-      <div className="container  mx-auto">
+    <div className="mt-6 category">
+      <div className="container mx-auto">
         <div className="px-2">
-          {/* bg-[#ffffffae] */}
-          {/* Swiper Slider */}
           <Swiper
             modules={[Navigation]}
-            // spaceBetween={10}
             slidesPerView={2}
             navigation={{
               nextEl: ".swiper-button-next",
               prevEl: ".swiper-button-prev",
             }}
-            // No autoplay
             breakpoints={{
               380: {
                 slidesPerView: 3,
-                // spaceBetween: 10,
               },
               640: {
                 slidesPerView: 4,
-                // spaceBetween: 10,
               },
               768: {
                 slidesPerView: 6,
-                // spaceBetween: 10,
               },
               1024: {
                 slidesPerView: 8,
-                // spaceBetween: 10,
               },
               1280: {
                 slidesPerView: 9,
-                // spaceBetween: 10,
               },
             }}
             className="relative"
@@ -152,25 +143,25 @@ const Category = () => {
             {categories.map((category) => (
               <SwiperSlide key={category.id}>
                 <div className="cursor-pointer py-2">
-                  {/* Category Card - No hover animations */}
-                  <div className="bg-white rounded-lg py-5">
-                    {/* Image Container - No hover effects */}
-                    <div className="relative mb-2">
-                      <div className="w-24 h-24 mx-auto rounded-full bg-gray-200 p-2">
-                        <img
-                          src={category.image}
-                          alt={category.name}
-                          className="w-full h-full object-cover rounded-full"
-                        />
+                  {/* Unique Category Card - No shadow, no border */}
+                  <div className="relative group">
+                    {/* Image Container with Gradient Background */}
+                    <div className="relative mb-3">
+                      <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-1">
+                        <div className="w-full h-full rounded-full bg-white overflow-hidden">
+                          <img
+                            src={category.image}
+                            alt={category.name}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Category Name - No hover effects */}
-                    <h3 className="text-center font-medium text-gray-800 text-xs line-clamp-1 leading-tight">
+                    {/* Category Name - Clean Typography */}
+                    <h3 className="text-center font-semibold text-gray-800 text-xs line-clamp-1 leading-tight transition-colors duration-200 group-hover:text-primary">
                       {category.name}
                     </h3>
-
-                    {/* Item Count Badge - No hover effects */}
                   </div>
                 </div>
               </SwiperSlide>
