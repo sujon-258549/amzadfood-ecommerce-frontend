@@ -147,7 +147,7 @@ export default function Header() {
           hideTopbar ? "-translate-y-full" : "translate-y-0"
         }`}
       >
-        <div className="h-[30px] flex items-center justify-center container mx-auto px-4">
+        <div className="h-[40px] flex items-center justify-center container mx-auto px-4">
           <span className="hidden sm:inline">
             Free Delivery on orders above ৳999
           </span>
@@ -166,7 +166,7 @@ export default function Header() {
       {/* MAIN HEADER – No Jump, Perfect Sticky */}
       <header
         className={`fixed inset-x-0 z-40 h-20 bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-md transition-all duration-200 ease-out ${
-          hideTopbar ? "top-0" : "top-8"
+          hideTopbar ? "top-0" : "top-10"
         }`}
       >
         <div className="container mx-auto px-4 h-full">
