@@ -5,7 +5,6 @@ import "@/app/globals.css";
 import Footer from "@/components/common/Foote/Footer";
 import MobileNav from "@/components/common/Header/MobileNav";
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,10 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header/>
-        {children}
-        <Footer/>
-        <MobileNav/>
+        <Header />
+        <div className="min-h-screen">{children}</div>
+        <Footer />
+        <MobileNav />
       </body>
     </html>
   );

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Store, X } from "lucide-react";
-import ShoppingCardDrawer from "@/components/shoppingCard/ShoppingCardDrawer";
+import ShoppingCardDrawer from "@/components/drower/ShoppingCardDrawer";
 import { useState, useEffect, useRef } from "react";
 import SearchBer from "@/components/SearchBer.tsx/SearchBer";
 

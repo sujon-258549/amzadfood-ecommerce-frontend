@@ -137,13 +137,13 @@ const SearchBer = forwardRef<HTMLInputElement, SearchBerProps>(
 
         {/* Dropdown */}
         {showDropdown && (
-          <div className="absolute left-0 right-0 top-full mt-0 bg-white border-x border-b border-gray-200 rounded-b-2xl shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="absolute left-0 right-0 top-full mt-0 bg-white border-x border-b border-gray-200 rounded-b-[5px] !pb-5 pt-[20px] shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
             <div className="max-h-[70vh] overflow-y-auto">
-              <div className="container mx-auto px-4 py-5">
+              <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
                 {/* Results Header */}
                 {hasResults && (
-                  <div className="mb-4 pb-3 border-b border-gray-200">
-                    <p className="text-sm font-bold text-gray-700">
+                  <div className="mb-3 pb-2 border-b border-gray-200">
+                    <p className="text-xs sm:text-sm font-bold text-gray-700">
                       পণ্য পাওয়া গেছে ({filteredProducts.length})
                     </p>
                   </div>
@@ -151,16 +151,17 @@ const SearchBer = forwardRef<HTMLInputElement, SearchBerProps>(
 
                 {/* Products Grid */}
                 {hasResults ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3">
                     {filteredProducts.map((product, index) => (
                       <Link
+                      
                         key={product.id}
-                        href={`/product/${product.id}`}
+                        href={`/products/${product.id}`}
                         onClick={handleProductClick}
-                        className="group flex flex-col gap-3 p-4 rounded-xl hover:bg-gradient-to-br hover:from-emerald-50 hover:to-blue-50 transition-all duration-300 border border-transparent hover:border-emerald-200 hover:shadow-lg"
-                        style={{ animationDelay: `${index * 50}ms` }}
+                        className="group flex flex-col gap-2 p-2 rounded-lg hover:bg-gradient-to-br hover:from-emerald-50 hover:to-blue-50 transition-all duration-300 mb-4 border border-transparent hover:border-emerald-200 hover:shadow-md"
+                        style={{ animationDelay: `${index * 50}ms`, boxShadow: "1px 1px 10px  rgba(0, 0, 0, 0.2)"}}
                       >
-                        <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                        <div className="relative  aspect-square bg-gray-100 rounded-md overflow-hidden">
                           <Image
                             src={product.image || "/placeholder-food.jpg"}
                             alt={product.name}
@@ -168,20 +169,20 @@ const SearchBer = forwardRef<HTMLInputElement, SearchBerProps>(
                             className="object-cover group-hover:scale-110 transition-transform duration-300"
                           />
                           {product.category && (
-                            <span className="absolute top-2 right-2 bg-emerald-600 text-white text-xs px-2 py-1 rounded-full font-medium">
+                            <span className="absolute top-1 right-1 bg-emerald-600 text-white text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                               {product.category}
                             </span>
                           )}
                         </div>
 
                         <div>
-                          <h3 className="font-bold text-gray-800 group-hover:text-emerald-700 line-clamp-2 text-sm">
+                          <h3 className="font-semibold text-gray-800 group-hover:text-emerald-700 line-clamp-2 text-xs">
                             {product.name}
                           </h3>
-                          <p className="text-xl font-bold text-emerald-600 mt-1">
+                          <p className="text-sm font-bold text-emerald-600 mt-0.5">
                             ৳{product.price.toLocaleString()}
                           </p>
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-[10px] text-gray-500 mt-0.5">
                             তাজা ও প্রিমিয়াম কোয়ালিটি
                           </p>
                         </div>

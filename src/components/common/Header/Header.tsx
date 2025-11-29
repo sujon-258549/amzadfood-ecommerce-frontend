@@ -2,17 +2,25 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { Search, X } from "lucide-react";
+import { Search, User, X, Phone, Users, Mail } from "lucide-react";
+import { 
+  FaTiktok, 
+  FaFacebook, 
+  FaInstagram, 
+  FaTwitter, 
+  FaLinkedin, 
+  FaYoutube 
+} from "react-icons/fa";
 import SearchBer from "@/components/SearchBer.tsx/SearchBer";
-import { UserDropdown } from "@/components/dropdown/UserDropdown";
-import { MenuDropdown } from "@/components/dropdown/MenuDropdown";
-import ShoppingCardDrawer from "@/components/shoppingCard/ShoppingCardDrawer";
+import ShoppingCardDrawer from "@/components/drower/ShoppingCardDrawer";
+import MenuOrCategoryDrower from "@/components/drower/MenuOrCategoryDrower";
+import LoginModal from "@/components/modal/LoginModal";
 
 export default function Header() {
   const [hideTopbar, setHideTopbar] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
-
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   useEffect(() => {
     let ticking = false;
 
@@ -50,11 +58,11 @@ export default function Header() {
       const timeout1 = setTimeout(() => {
         searchInputRef.current?.focus();
       }, 0);
-      
+
       const timeout2 = setTimeout(() => {
         searchInputRef.current?.focus();
       }, 50);
-      
+
       const timeout3 = setTimeout(() => {
         searchInputRef.current?.focus();
       }, 100);
@@ -97,23 +105,77 @@ export default function Header() {
     <>
       {/* TOPBAR – Fast & Smooth Hide */}
       <div
-        className={`fixed inset-x-0 top-0 z-50 bg-primary text-white text-sm font-semibold text-center transition-transform duration-200 ease-out ${
+        className={`fixed inset-x-0 top-0 z-50 bg-[#101828] text-white text-sm font-medium transition-transform duration-200 ease-out ${
           hideTopbar ? "-translate-y-full" : "translate-y-0"
         }`}
       >
-        <div className="h-[40px] flex items-center justify-center container mx-auto px-4">
-          <span className="hidden sm:inline">
-            Free Delivery on orders above ৳999
-          </span>
-          <span className="mx-3">•</span>
-          <span>
-            Call:{" "}
-            <a href="tel:09638000888" className="underline">
-              09638-000888
+        <div className="h-[40px] flex items-center justify-between container mx-auto px-4">
+          {/* Left Side - Phone */}
+          <div className="flex items-center gap-2">
+            <Phone className="w-4 h-4" />
+            <a href="tel:09613824071" className="hover:text-white/80 transition-colors">
+              09613824071
             </a>
-          </span>
-          <span className="mx-3 hidden md:inline">•</span>
-          <span className="hidden md:inline">100% Fresh & Halal</span>
+          </div>
+
+          {/* Right Side - Join Group + Social Icons */}
+          <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              <span>Join our group for more offer</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <a
+                href="#"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="Facebook"
+              >
+                <FaFacebook className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="Instagram"
+              >
+                <FaInstagram className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="TikTok"
+              >
+                <FaTiktok className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="Twitter"
+              >
+                <FaTwitter className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="Email"
+              >
+                <Mail className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                className="hover:opacity-80 transition-opacity"
+                aria-label="YouTube"
+              >
+                <FaYoutube className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -138,7 +200,7 @@ export default function Header() {
               <SearchBer />
             </div>
 
-            <div className="flex items-center gap-5">
+            <div className="flex items-center md:gap-5 gap-2">
               {/* Mobile Search Button */}
               <div className="block md:hidden">
                 <button
@@ -158,8 +220,15 @@ export default function Header() {
               <div className="hidden md:flex items-center gap-6">
                 <ShoppingCardDrawer />
               </div>
-              <UserDropdown />
-              <MenuDropdown />
+              <button 
+                className="cursor-pointer" 
+                onClick={() => setIsLoginModalOpen(true)}
+              >
+                <User />
+              </button>
+              <LoginModal open={isLoginModalOpen} onOpenChange={setIsLoginModalOpen} />
+              {/* <UserDropdown /> */}
+              <MenuOrCategoryDrower />
             </div>
           </div>
         </div>
@@ -172,7 +241,7 @@ export default function Header() {
             {/* Search Header */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200 bg-white">
               <div className="flex-1">
-                <SearchBer 
+                <SearchBer
                   ref={searchInputRef}
                   onClose={() => setIsSearchOpen(false)}
                 />
