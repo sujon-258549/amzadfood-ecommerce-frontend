@@ -1,173 +1,170 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "../../Styles/category.css";
+import Link from "next/link";
+import Image from "next/image";
 
-// Mock category data
+// Amzad Food Categories
 const categories = [
   {
     id: 1,
-    name: "Electronics",
-    image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=150",
+    name: "Fresh Meat",
+    bengaliName: "তাজা মাংস",
+    image: "https://amzadfood.com/wp-content/uploads/2024/04/%E0%A6%86%E0%A6%96%E0%A7%87%E0%A6%B0-%E0%A6%A6%E0%A6%BE%E0%A6%A8%E0%A6%BE-%E0%A6%97%E0%A7%81%E0%A6%A1%E0%A6%BC-3-kg-400x400.webp",
+    slug: "fresh-meat",
   },
   {
     id: 2,
-    name: "Fashion",
-    image: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=150",
+    name: "Dry Fruits",
+    bengaliName: "ড্রাই ফ্রুটস",
+    image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=400&fit=crop",
+    slug: "dry-fruits",
   },
   {
     id: 3,
-    name: "Home & Garden",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=150",
+    name: "Seafood",
+    bengaliName: "সীফুড",
+    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=400&fit=crop",
+    slug: "seafood",
   },
   {
     id: 4,
-    name: "Sports",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=150",
+    name: "Vegetables",
+    bengaliName: "শাকসবজি",
+    image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=400&fit=crop",
+    slug: "vegetables",
   },
   {
     id: 5,
-    name: "Beauty",
-    image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=150",
+    name: "Fruits",
+    bengaliName: "ফল",
+    image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=400&fit=crop",
+    slug: "fruits",
   },
   {
     id: 6,
-    name: "Toys",
-    image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=150",
+    name: "Spices",
+    bengaliName: "মসলা",
+    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=400&fit=crop",
+    slug: "spices",
   },
   {
     id: 7,
-    name: "Books",
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=150",
+    name: "Rice & Grains",
+    bengaliName: "চাল ও শস্য",
+    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=400&fit=crop",
+    slug: "rice-grains",
   },
   {
     id: 8,
-    name: "Food",
-    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=150",
+    name: "Dairy Products",
+    bengaliName: "দুগ্ধজাত পণ্য",
+    image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop",
+    slug: "dairy",
   },
   {
     id: 9,
-    name: "Health",
-    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=150",
+    name: "Honey & Nuts",
+    bengaliName: "মধু ও বাদাম",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    slug: "honey-nuts",
   },
   {
     id: 10,
-    name: "Automotive",
-    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=150",
+    name: "Organic Food",
+    bengaliName: "অর্গানিক খাবার",
+    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=400&fit=crop",
+    slug: "organic",
   },
   {
     id: 11,
-    name: "Art & Crafts",
-    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=150",
+    name: "Frozen Food",
+    bengaliName: "হিমায়িত খাবার",
+    image: "https://images.unsplash.com/photo-1609501676725-7186f3a1f24f?w=400&h=400&fit=crop",
+    slug: "frozen",
   },
   {
     id: 12,
-    name: "Music",
-    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=150",
+    name: "Beverages",
+    bengaliName: "পানীয়",
+    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=400&fit=crop",
+    slug: "beverages",
   },
   {
     id: 13,
-    name: "Pets",
-    image: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=150",
+    name: "Snacks",
+    bengaliName: "স্ন্যাকস",
+    image: "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop",
+    slug: "snacks",
   },
   {
     id: 14,
-    name: "Travel",
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=150",
+    name: "Bakery",
+    bengaliName: "বেকারি",
+    image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop",
+    slug: "bakery",
   },
   {
     id: 15,
-    name: "Jewelry",
-    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=150",
+    name: "Cooking Oil",
+    bengaliName: "রান্নার তেল",
+    image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop",
+    slug: "cooking-oil",
   },
   {
     id: 16,
-    name: "Fitness",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=150",
-  },
-  {
-    id: 17,
-    name: "Baby",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
-  },
-  {
-    id: 18,
-    name: "Office",
-    image: "https://images.unsplash.com/photo-1587334894137-85bde0b9b7e6?w=150",
-  },
-  {
-    id: 19,
-    name: "Gaming",
-    image: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=150",
-  },
-  {
-    id: 20,
-    name: "Outdoor",
-    image: "https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?w=150",
+    name: "Pulses",
+    bengaliName: "ডাল",
+    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=400&fit=crop",
+    slug: "pulses",
   },
 ];
 
 const Category = () => {
   return (
-    <div className="mt-6 category">
-      <div className="container mx-auto">
-        <div className="px-2">
-          <Swiper
-            modules={[Navigation]}
-            slidesPerView={2}
-            navigation={{
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            }}
-            breakpoints={{
-              380: {
-                slidesPerView: 3,
-              },
-              640: {
-                slidesPerView: 4,
-              },
-              768: {
-                slidesPerView: 6,
-              },
-              1024: {
-                slidesPerView: 8,
-              },
-              1280: {
-                slidesPerView: 9,
-              },
-            }}
-            className="relative"
-          >
-            {categories.map((category) => (
-              <SwiperSlide key={category.id}>
-                <div className="cursor-pointer py-2">
-                  {/* Unique Category Card - No shadow, no border */}
-                  <div className="relative group">
-                    {/* Image Container with Gradient Background */}
-                    <div className="relative mb-3">
-                      <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-1">
-                        <div className="w-full h-full rounded-full bg-white overflow-hidden">
-                          <img
-                            src={category.image}
-                            alt={category.name}
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                          />
-                        </div>
-                      </div>
+    <div className="mt-6 category bg-white py-6">
+      <div className="container mx-auto px-4">
+        <Swiper
+          modules={[Navigation,Autoplay]}
+          autoplay={{
+            delay: 1500,
+            disableOnInteraction: false,
+          }}
+          slidesPerView="auto"
+          spaceBetween={12}
+          freeMode={true}
+          className="relative"
+        >
+          {categories.map((category) => (
+            <SwiperSlide key={category.id} className="!w-[100px]">
+              <Link href={`/category/${category.slug}`}>
+                <div className="cursor-pointer">
+                  {/* Flipkart-style Category - Fixed width, hot hover animation */}
+                  <div className="flex flex-col items-center justify-center group">
+                    {/* Image Container - Fixed width, full width image, hot hover effects */}
+                    <div className="relative w-full aspect-square mb-2 bg-white rounded-lg overflow-hidden border border-gray-100 group-hover:border-primary group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:-translate-y-1 transition-all duration-300 ease-out">
+                      <Image
+                        src={category.image}
+                        alt={category.name}
+                        fill
+                        className="object-cover rounded-[5px] w-full h-full group-hover:scale-110 transition-transform duration-300 ease-out"
+                        sizes="100px"
+                      />
                     </div>
 
-                    {/* Category Name - Clean Typography */}
-                    <h3 className="text-center font-semibold text-gray-800 text-xs line-clamp-1 leading-tight transition-colors duration-200 group-hover:text-primary">
-                      {category.name}
+                    {/* Category Name - Only Bengali name */}
+                    <h3 className="text-center font-medium text-gray-700 text-xs line-clamp-2 leading-tight group-hover:text-primary transition-colors duration-300">
+                      {category.bengaliName}
                     </h3>
                   </div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

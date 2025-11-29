@@ -1,7 +1,7 @@
 import DownloadAppCard from "./DownloadAppCard";
 import HeroSlider from "./HeroSlider";
 
-const HeroSection = () => {
+const HeroSection2 = () => {
   return (
     <div className="container mx-auto px-4">
       <div className="md:my-8 my-4 flex flex-col lg:flex-row gap-2 items-start">
@@ -19,4 +19,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default HeroSection2;

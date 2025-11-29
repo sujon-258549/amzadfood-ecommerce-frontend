@@ -1,8 +1,9 @@
+import PrivaryPolicy from '@/components/privacy-policy/PrivaryPolicy'
 import React from 'react'
 
 const PrivacyPolicy = () => {
   return (
-    <div>PrivacyPolicy</div>
+    <div><PrivaryPolicy /></div>
   )
 }
 

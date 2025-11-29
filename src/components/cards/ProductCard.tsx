@@ -1,90 +1,102 @@
+"use client";
+
 import Image from "next/image";
-import { Heart, ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { ShoppingCart, Eye } from "lucide-react";
 import { Button } from "../ui/button";
+import { useState } from "react";
 
 interface Product {
   id: number;
   name: string;
   price: number;
   oldPrice: number;
+  image?: string;
   save?: number;
 }
 
 const ProductCard = ({ product }: { product: Product }) => {
+  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Add to cart logic here
+    console.log("Added to cart:", product.id);
+    // TODO: Implement actual add to cart functionality
+  };
+
+  const handleViewDetails = () => {
+    // Navigate to product details page
+    window.location.href = `/products/${product.id}`;
+  };
+
   return (
-    <div>
-      <div
-        key={product.id}
-        className="group border-[1.4px] border-primary relative bg-white rounded-[5px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-primary/30"
-      >
-        {/* Offer Badge - Unique Circular Design */}
-        <div className="absolute top-4 left-4 z-10">
-          {/* <div className="relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-pink-600 rounded-full blur-xl opacity-70 scale-150 animate-pulse"></div>
-        <div className="relative bg-white p-1 rounded-full shadow-2xl">
-          <div className="bg-gradient-to-br from-red-500 to-pink-600 text-white font-black text-xs px-4 py-2 rounded-full flex items-center gap-1 shadow-lg">
-            <span className="text-lg">Save</span>
-            <span className="text-sm">৳{product.save}</span>
-          </div>
-        </div>
-      </div> */}
-        </div>
-
-        {/* Wishlist - Floating Heart */}
-        <button className="absolute top-4 right-4 z-10 w-11 h-11 bg-white/95 backdrop-blur-sm rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-all hover:bg-red-50">
-          <Heart className="w-5 h-5 text-gray-600  group-hover:text-red-500 transition-all" />
-        </button>
-
-        {/* Image */}
-        <div className="relative h-52 bg-gradient-to-b from-gray-50 to-white">
+    <div className="group relative bg-white rounded-[3px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary/30 w-full">
+      {/* Product Image - Clickable to view details */}
+      <Link href={`/products/${product.id}`} className="block">
+        <div className="relative w-full bg-white cursor-pointer" style={{ height: '200px' }}>
           <Image
-            src={`https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=600&h=600&fit=crop&seed=${product.id}`}
+            src={
+              product.image ||
+              `https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=600&h=600&fit=crop&seed=${product.id}`
+            }
             alt={product.name}
             fill
-            className="object-cover group-hover:scale-110 transition-transform duration-700"
-            sizes="(max-width: 768px) 50vw, 25vw"
+            className="object-cover w-full h-full"
+            sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         </div>
+      </Link>
 
-        {/* Card Body */}
-        <div className="p-5 space-y-4">
-          {/* Title */}
-          <h3 className="font-semibold text-gray-800 line-clamp-2 text-sm leading-tight group-hover:text-primary transition-colors">
+      {/* Action Bar - Grey bar with separate buttons (below image) */}
+      <div className="bg-gray-100 h-11 sm:h-12 flex items-center justify-between px-3 sm:px-4 border-t border-gray-200">
+        {/* Eye Icon Button - Quick View / View Details (Left) */}
+        <Link href={`/products/${product.id}`} className="flex-shrink-0">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-9 w-9 sm:h-10 sm:w-10 rounded-full hover:bg-gray-200 text-gray-600 hover:text-primary transition-all duration-200 touch-manipulation"
+            aria-label="View details"
+          >
+            <Eye className="w-4 h-4 sm:w-5 sm:h-5" />
+          </Button>
+        </Link>
+
+        {/* Partition/Divider */}
+        <div className="h-5 sm:h-6 w-px bg-gray-300 flex-shrink-0"></div>
+
+        {/* Shopping Cart Icon Button - Add to Cart (Right) - No navigation */}
+        <Button
+          onClick={handleAddToCart}
+          variant="ghost"
+          size="icon"
+          className="h-9 w-9 sm:h-10 sm:w-10 rounded-full cursor-pointer hover:bg-primary hover:text-white text-gray-600 transition-all duration-200 touch-manipulation flex-shrink-0"
+          aria-label="Add to cart"
+        >
+          <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
+        </Button>
+      </div>
+
+      {/* Product Info - Clickable to view details */}
+      <Link href={`/products/${product.id}`} className="block">
+        <div className="p-3 sm:p-4 space-y-2 sm:space-y-3 cursor-pointer">
+          {/* Product Title */}
+          <h3 className="font-medium text-gray-900 line-clamp-2 text-xs sm:text-sm leading-tight group-hover:text-primary transition-colors min-h-[2.5rem] sm:min-h-[2.75rem]">
             {product.name}
           </h3>
 
-          {/* Price + Discount % */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-black text-primary">
-                ৳{product.price}
-              </span>
-              <span className="text-sm text-gray-500 line-through">
-                ৳{product.oldPrice}
-              </span>
-            </div>
-            <div className="bg-emerald-50 text-emerald-600 font-bold text-xs px-3 py-1.5 rounded-full">
-              {Math.round(
-                ((product.oldPrice - product.price) / product.oldPrice) * 100
-              )}
-              % OFF
-            </div>
+          {/* Price Section */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-lg sm:text-xl font-bold text-primary">
+              ৳{product.price.toLocaleString()}
+            </span>
+            <span className="text-xs sm:text-sm text-gray-500 line-through">
+              ৳{product.oldPrice.toLocaleString()}
+            </span>
           </div>
-
-          {/* Modern shadcn Button - Unique & Standout */}
-          <Button
-            className="w-full h-10 rounded-[5px] bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group/button"
-            size="lg"
-          >
-            <ShoppingCart className="w-5 h-5 mr-2 group-hover/button:translate-x-1 transition-transform" />
-            <span className="tracking-wide text-sm">Add to Cart</span>
-          </Button>
         </div>
-
-        {/* Bottom Glow Effect on Hover */}
-        <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"></div>
-      </div>
+      </Link>
     </div>
   );
 };

@@ -1,31 +1,18 @@
 "use client";
 
 import React from "react";
-import { Shield, Lock, Eye, FileText, Mail, Phone } from "lucide-react";
+import { Lock, Eye, FileText, Mail, Phone } from "lucide-react";
 import Link from "next/link";
 
 const PrivaryPolicy = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-8 md:py-12">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+    <div className=" py-8 md:py-12">
+      <div className="container">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-            <Shield className="w-8 h-8 text-primary" />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            Privacy Policy
-          </h1>
-          <p className="text-lg text-gray-600">
-            গোপনীয়তা নীতি / Privacy Policy
-          </p>
-          <p className="text-sm text-gray-500 mt-2">
-            Last Updated: January 2025
-          </p>
-        </div>
+      
 
         {/* Main Content */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 md:p-10 space-y-8">
+        <div className="">
           {/* Introduction */}
           <section>
             <div className="flex items-center gap-3 mb-4">
@@ -177,7 +164,7 @@ const PrivaryPolicy = () => {
           </section>
 
           {/* Contact Information */}
-          <section className="bg-primary/5 rounded-lg p-6 border border-primary/20">
+          <section className=" py-6 ">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               Contact Us / আমাদের সাথে যোগাযোগ করুন
             </h2>
@@ -211,10 +198,10 @@ const PrivaryPolicy = () => {
               Changes to This Policy / এই নীতিতে পরিবর্তন
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.
+              We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the Last Updated date. You are advised to review this Privacy Policy periodically for any changes.
             </p>
             <p className="text-gray-700 leading-relaxed mt-4">
-              আমরা সময়ে সময়ে এই গোপনীয়তা নীতি আপডেট করতে পারি। আমরা এই পৃষ্ঠায় নতুন গোপনীয়তা নীতি পোস্ট করে এবং "সর্বশেষ আপডেট" তারিখ আপডেট করে যে কোনও পরিবর্তনের বিষয়ে আপনাকে অবহিত করব। যে কোনও পরিবর্তনের জন্য এই গোপনীয়তা নীতিটি পর্যায়ক্রমে পর্যালোচনা করার পরামর্শ দেওয়া হচ্ছে।
+              আমরা সময়ে সময়ে এই গোপনীয়তা নীতি আপডেট করতে পারি। আমরা এই পৃষ্ঠায় নতুন গোপনীয়তা নীতি পোস্ট করে এবং সর্বশেষ আপডেট তারিখ আপডেট করে যে কোনও পরিবর্তনের বিষয়ে আপনাকে অবহিত করব। যে কোনও পরিবর্তনের জন্য এই গোপনীয়তা নীতিটি পর্যায়ক্রমে পর্যালোচনা করার পরামর্শ দেওয়া হচ্ছে।
             </p>
           </section>
         </div>
