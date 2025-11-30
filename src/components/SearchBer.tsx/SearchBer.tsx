@@ -119,7 +119,7 @@ const SearchBer = forwardRef<HTMLInputElement, SearchBerProps>(
     return (
       <div ref={searchRef} className="relative w-full max-w-2xl mx-auto">
         {/* Search Input */}
-        <InputGroup className="border border-gray-300 rounded-lg hover:border-primary/60 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all shadow-sm">
+        <InputGroup className="border  border-gray-300 rounded-[5px] hover:border-primary/60 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all shadow-sm">
           <InputGroupInput
             ref={inputRef}
             placeholder="Enter your product name"

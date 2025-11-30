@@ -27,7 +27,7 @@ const mobileHeroImages = productBannerImages;
 
 const HeroSection = () => {
   return (
-    <section className="bg-white py-4 md:py-6">
+    <section className=" py-4 md:py-6">
       <div className="container">
         {/* ==================== MOBILE ONLY ==================== */}
         <div className="block md:hidden">

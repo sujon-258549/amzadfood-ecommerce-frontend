@@ -23,7 +23,7 @@ export const DividerDiamond = ({
   primaryColor = 'indigo-600' 
 }) => {
   return (
-    <div className="relative flex items-center justify-center py-3 md:py-6">
+    <div className="relative flex items-center justify-center">
       {/* Horizontal line */}
       <div className="absolute inset-x-0 h-px bg-gray-300" />
 

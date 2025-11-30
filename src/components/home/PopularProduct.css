@@ -1,0 +1,86 @@
+.popular-product-swiper {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 650px;
+  overflow: hidden;
+}
+
+/* Force grid layout for 2 rows - Swiper Grid handles this automatically */
+
+/* Responsive height adjustments */
+@media (max-width: 768px) {
+  .popular-product-swiper {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 640px) {
+  .popular-product-swiper {
+    min-height: 450px;
+  }
+}
+
+.popular-product-swiper .swiper-wrapper {
+  width: 100%;
+  height: auto;
+}
+
+.popular-product-swiper .swiper-slide {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Grid slide sizing - let Swiper Grid handle it */
+.popular-product-swiper.swiper-grid .swiper-slide {
+  height: auto;
+}
+
+.popular-product-swiper .swiper-slide > div {
+  width: 100%;
+  height: 100%;
+}
+
+/* ProductCard styling within slider */
+.popular-product-swiper .swiper-slide a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.popular-product-swiper .swiper-slide .rounded-\[5px\] {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.popular-product-swiper .swiper-slide .relative.aspect-square {
+  flex-shrink: 0;
+}
+
+.popular-product-swiper .swiper-slide .p-4 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grid layout handled by Swiper Grid module */
+
+/* Pagination dots styling */
+.popular-product-swiper .swiper-pagination-bullet {
+  background: #019532;
+  opacity: 0.5;
+  width: 8px;
+  height: 8px;
+}
+
+.popular-product-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #019532;
+  width: 24px;
+  border-radius: 4px;
+}
+

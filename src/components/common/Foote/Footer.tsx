@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Footer() {
   return (
-    <footer className="bg-white pt-8 md:pt-12 mt-8 md:mt-16 text-black">
+    <footer className="bg-white pt-8 md:pt-12  text-black">
       {/* Main Footer */}
       <div className="container">
         <div>
