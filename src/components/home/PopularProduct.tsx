@@ -1,7 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Grid, Pagination } from "swiper/modules";
+import { Grid } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/grid";
 import "./PopularProduct.css";
@@ -213,24 +213,23 @@ const PopularProduct = () => {
     return (
         <section className="py-8 md:py-12">
             <div className="container">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                     {/* LEFT SIDE - Offer Image Card */}
-                    <div className="lg:col-span-1">
-                        <Link href="/offers" className="block h-full">
-                            <div className="relative w-full h-full min-h-[600px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div className="lg:col-span-1 flex">
+                        <Link href="/offers" className="w-full h-full">
+                            <div className="relative w-full h-full min-h-[530px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <Image
                                     src="/banner/b4.png"
                                     alt="Special Offer"
                                     fill
                                     className="object-cover"
-                                    sizes="(max-width: 1024px) 100vw, 33vw"
                                 />
                             </div>
                         </Link>
                     </div>
 
                     {/* RIGHT SIDE - Product Slider (2 rows: 4 columns x 2 rows, slide one card) */}
-                    <div className="lg:col-span-2">
+                    <div className="lg:col-span-2 flex">
                         <Swiper
                             slidesPerView={4}
                             grid={{
@@ -239,10 +238,7 @@ const PopularProduct = () => {
                             }}
                             spaceBetween={16}
                             slidesPerGroup={1}
-                            pagination={{
-                                clickable: true,
-                            }}
-                            modules={[Grid, Pagination]}
+                            modules={[Grid]}
                             className="popular-product-swiper"
                             breakpoints={{
                                 0: {
